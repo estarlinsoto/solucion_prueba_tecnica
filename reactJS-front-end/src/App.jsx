@@ -122,7 +122,7 @@ export function App() {
           <option value={'me'}>ME</option>
           <option value={'mi'}>MI</option>
           <option value={'mb'}>MB</option>
-          <option value={'mg'}>MG</option>
+          <option value={'mlg'}>MLG</option>
         </select>
 
         {/*Asigno el filtro de seleccion de resultados por pagina*/}
