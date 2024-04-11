@@ -1,0 +1,3 @@
+class AddFeatureController < ApplicationController
+    
+end
