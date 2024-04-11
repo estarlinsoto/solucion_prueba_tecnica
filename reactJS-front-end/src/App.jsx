@@ -76,7 +76,7 @@ export function App() {
     textoSinEspacios = textoSinEspacios.replace(/^\s+|\s+$/gm, '')
 
     // Verifica si el comentario está vacío
-    if (textoSinEspacios.startsWith('')) {
+    if (!textoSinEspacios.startsWith('')) {
       setCommentText('')
       setCommentAlertText('El comentario tiene que contener texto')
       setAlerColor('danger')
