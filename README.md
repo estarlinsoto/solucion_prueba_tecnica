@@ -10,7 +10,18 @@
 -La api cuenta con las siguientes rutas  
 -/api/features/:feature_id/comments => (POST)  
 -/api/features/:feature_id/comments => (GET)  
--http://127.0.0.1:3000/api/features?page=1&per_page=100&filters[mag_type]=mw => (GET)
+-http://127.0.0.1:3000/api/features?page=1&per_page=100&filters[mag_type]=mw => (GET)  
+#Espero que este proyecto sea de su agrado para cualquier pregunta o feedback no dude en contactarme!!  
+
+#Acontinuacion algunas imagenes de la app!
+
+![Descripción de la imagen](proyecto1.jpg)
+![Descripción de la imagen](proyecto2.jpg)
+![Descripción de la imagen](proyecto3.png)
+![Descripción de la imagen](proyecto4.jpg)
+![Descripción de la imagen](proyecto5.png)
+![Descripción de la imagen](proyecto6.jpg)
+![Descripción de la imagen](proyecto7.jpg)
 
 
   
