@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import style from './App.module.css'
+
+// Variable global para la página actual
 let page = 1
 
 export function App() {
-
+  // Definición de múltiples estados con useState
   const [featuresData, setFeaturesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,11 +19,10 @@ export function App() {
   const [magFilter, setMagFilter] = useState('')
   const [perPageFilter, setPerPageFilter] = useState(10)
 
+  // Función para realizar la solicitud de datos
   const fetchData = async (pageParam) => {
     setFeaturesData(null)
-    console.log(
-      `page ${page} , perPageFilter ${perPageFilter}, magfilter, ${magFilter}`
-    )
+
     if (pageParam == 'next') {
       page++
     } else if (pageParam == 'prev') {
@@ -31,12 +32,12 @@ export function App() {
     try {
       const response = await fetch(`http://127.0.0.1:3000/api/features?page=${page}&per_page=${perPageFilter}&filters[mag_type]=${magFilter}`);
       if (!response.ok) {
-        throw new Error('Error al conseguir los datos');
+        throw new Error('Error al traer los datos');
       }
       const jsonData = await response.json();
       setFeaturesData(jsonData);
 
-      //console.log(featuresData.pagination)
+
     } catch (error) {
       setError(error);
     } finally {
@@ -44,13 +45,14 @@ export function App() {
     }
   };
 
-
+  // useEffect para cargar los datos al inicio
   useEffect(() => {
 
 
     fetchData()
   }, []);
 
+  // Función para obtener los comentarios de una característica
   const verComentarios = async (external_id) => {
     setCommentsData(null)
     await fetch(`http://127.0.0.1:3000/api/feature/${external_id}/comment`)
@@ -68,10 +70,12 @@ export function App() {
       })
   }
 
+  // Función para enviar un comentario
   const hacerUnComenatario = async () => {
     let textoSinEspacios = commentText
     textoSinEspacios = textoSinEspacios.replace(/^\s+|\s+$/gm, '')
 
+    // Verifica si el comentario está vacío
     if (textoSinEspacios.startsWith('')) {
       setCommentText('')
       setCommentAlertText('El comentario tiene que contener texto')
@@ -108,7 +112,7 @@ export function App() {
       <h1 className='text-center'>Filtros</h1>
 
       <div className=' row justify-content-center text-center'>
-        
+        {/*Asigno el filtro de seleccion de magnitud*/}
         <select className="form-select col-6 w-25" aria-label="Default select example" onChange={(e) => setMagFilter(e.target.value)}>
           <option value={''}>Todos los mag types</option>
           <option value={'md'} >MD</option>
@@ -120,8 +124,8 @@ export function App() {
           <option value={'mb'}>MB</option>
           <option value={'mg'}>MG</option>
         </select>
-      
 
+        {/*Asigno el filtro de seleccion de resultados por pagina*/}
         <select className="form-select col-6 w-25 " aria-label="Default select example" onChange={(e) => setPerPageFilter(e.target.value)}>
           <option value={10}>Filtrar por cantidad</option>
           <option value={25} >25</option>
@@ -133,6 +137,7 @@ export function App() {
           <option value={1000}>1000</option>
         </select>
 
+        {/*hago un request con las selecciones y retorno a la pagina 1*/}
         <button type="button" className="btn btn-primary col-1 mx-2" onClick={() => fetchData(page = 1)}>Filtrar</button>
 
         <div className="btn-group w-50 col-12 m-5" role="group" aria-label="Basic example">
@@ -146,7 +151,7 @@ export function App() {
 
       </div>
 
-      
+
       <div className='d-flex p-4 row justify-content-center'>
         {
 
